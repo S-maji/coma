@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coma</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <div class="wrapper">
+      <div class="main-container">
+        <% flash.each do |key, value| %>
+          <div class="<%= bootstrap_class_for(key) %> text-center message"><%= value %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

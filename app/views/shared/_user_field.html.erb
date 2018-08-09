@@ -1,0 +1,11 @@
+<div class="user-field">
+    <div class="user-image">
+        <%= image_tag @user.image %>
+    </div>
+    <div class="user-info">
+        <li><%= @user.name %></li>
+        <li><%= link_to "フォロー　：#{@user.followed_users.count}", following_user_path(@user) %></li>
+        <li><%= link_to "フォロワー：#{@user.followers.count}", followers_user_path(@user) %></li>
+        <li><%= link_to "お気に入り：#{@user.favorites.count}", favorites_path(@user) %></li>
+    </div>
+</div>

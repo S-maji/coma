@@ -1,0 +1,16 @@
+<div class="show-item">
+    <div class="post-show">
+        <div class="show-image">
+            <%= link_to image_tag(post.image_1), post_path(post.id) %>
+        </div>
+    </div>
+    <ul class="info">
+        <li><%= post[:created_at].strftime("%Y年%m月%d日 %H:%M") %></li>
+        <li><%= post.title %></li>
+        <li>コメント：<%= post.reactions.count %></li>
+        <li>お気に入り：<%= post.favorites.count %></li>
+         <% if user_signed_in? && post.user_id == current_user.id %>
+            <li><%= link_to "削除", post, method: :delete %></li>
+         <% end %>
+    </ul>
+</div>

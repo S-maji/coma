@@ -1,0 +1,15 @@
+<div class="follow-illust">
+    <p>＜フォローユーザーの投稿＞</p>
+    <% @followed_user_posts.each do |item| %>
+        <div class="post-item">
+            <p><%= item.title %></p>
+            <div class="post-image">
+                <%= link_to image_tag(item.image_1), item %>
+            </div>
+            <p><%= link_to "#{item.user.name}", item.user %></p>
+        </div>
+    <% end %>
+    <div class="kaminari">
+        <%= paginate @followed_user_posts, :param_name => 'follow_page' %>
+    </div>
+</div>

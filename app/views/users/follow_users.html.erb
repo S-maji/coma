@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 secsion">
+            <%= render 'shared/user_field' %>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
+            <% @users.each do |user| %>
+                <div class="col-md-5">
+                    <%= link_to(user) do %>
+                        <div class="user-field">
+                            <div class="user-image">
+                                <%= image_tag user.image %>
+                            </div>
+                            <div class="user-info">
+                                <li><%= user.name %></li>
+                                <li>投稿数：<%= user.posts.count %></li>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

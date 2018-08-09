@@ -1,0 +1,13 @@
+<% unless current_user == @user %>
+    <% unless @post.favorite?(current_user) %>
+        <%= form_for(@post.favorites.build(user_id: current_user.id)) do |f| %>
+          <div><%= f.hidden_field :user_id %></div>
+          <%= f.submit "お気に入りに追加", class: "btn btn-sm btn-primary btn-s" %>
+        <% end %>
+    <% else %>
+        <%= form_for(@post.favorites.find_by(user_id: current_user.id),
+                     html: { method: :delete }) do |f| %>
+          <%= f.submit "お気に入りを解除", class: "btn btn-sm btn-danger btn-s" %>
+        <% end %>  
+    <% end %>
+<% end %>

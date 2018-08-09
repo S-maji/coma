@@ -1,0 +1,92 @@
+<div class="post-user-comment">
+    <h5>タイトル</h5>
+    <p><%= @post.title %></p>
+    <h5>投稿者コメント</h5>
+    <p><%= @post.comment %></p>
+</div>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-10 secsion">
+        <div id="carousel" class="carousel slide" data-interval="false">
+             <div class="carousel-inner" role="listbox">
+                
+                <div class="item active post-show-image">
+                    <%= image_tag @post.image_1 %>
+                </div>
+                <% if @post.image_2? %>
+                    <div class="item post-show-image">
+                        <%= image_tag @post.image_2 %>
+                    </div>
+                <% end %>
+                <% if @post.image_3? %>
+                    <div class="item post-show-image">
+                        <%= image_tag @post.image_3 %>
+                    </div>
+                <% end %>
+                
+            </div>
+            
+            <% if @post.image_2? || @post.image_3? %>   
+                <a class="right" href="#carousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <a class="left" href="#carousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            <% end %>
+            
+        </div>
+        
+        <%= render 'users/favorite' %>
+        
+    </div>
+    
+    <div class="col-md-2 secsion">
+        <%= link_to user_path(@post.user.id) do %>
+            <div class="post-user-field">
+                <div class="post-user-image">
+                    <%= image_tag @post.user.image %>
+                </div>
+                <div class="post-user-info">
+                    <li>投稿者</li>
+                    <li><%= @post.user.name %></li>
+                </div>
+            </div>
+        <% end %>
+    <%= render 'users/follow' %>
+    
+    <div class="other-post">
+        <% if @post.image_2? %>
+            <div class="other-post-image">
+                <%= image_tag @post.image_2 %>
+            </div>
+        <% end %>
+        <% if @post.image_3? %>
+            <div class="other-post-image">
+                <%= image_tag @post.image_3 %>
+            </div>
+        <% end %>
+    </div>
+    
+    <div>
+        <%= form_for(@reaction) do |f| %>
+            <div class="form-group">
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.text_field :comment, placeholder:"コメント", class:"form-control"  %>
+            </div>
+            <div class="form-group">
+                <%= f.submit "コメントする" %>
+            </div>
+        <% end %>
+    </div>
+    
+    <div class="post-comment">
+        <% @reactions.each do |reaction| %>
+        <div class="comment-item">
+            <p><%= reaction.user.name %></p>
+            <p><%= reaction.comment %></p>
+        </div>
+        <% end %>
+    </div>
+</div>
+</div>

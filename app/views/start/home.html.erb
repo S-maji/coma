@@ -1,0 +1,54 @@
+<div class="container">
+    <% if signed_in? %>
+        <div class="row">
+            <div class="col-md-3 secsion">
+                <%= render 'shared/user_field' %>
+                <div class="btn-follow">
+                    <%= link_to "投稿する", new_post_path, class:"btn btn-sm btn-primary btn-block" %>
+                </div>
+            </div>
+            <div class="col-md-8 col-md-offset-1">
+                <% if @posts.any? %>
+                    <%= render @posts %>
+                <% end %>
+                <%= paginate @posts, :param_name => 'post_page' %>
+            </div>
+        </div>
+        <% if @followed_user_posts.any? %>
+            <%= render 'posts/followed_user_posts' %>
+        <% end %>
+    <% else %>
+        <div class="text-center">
+            <h1 class="site-title">+coma</h1>
+            <div>
+                <%= link_to "新しく始める", new_user_registration_path, class:"btn btn-lg btn-success btn-size" %>
+            </div>
+            <div>
+                <%= link_to "ログイン", user_session_path, class:"btn btn-lg btn-info btn-size" %>
+            </div>
+            <p>他のアカウントで登録する</p>
+            <div>
+                <%= link_to "facebook", user_facebook_omniauth_authorize_path, class:"btn btn-lg btn-primary btn-size" %>
+                <%= link_to "twitter", user_twitter_omniauth_authorize_path, class:"btn btn-lg btn-info btn-size" %>
+            </div>
+        </div>
+    <% end %>
+    <div class="top-illust">
+        <% if @all_posts.any? %>
+            <p>＜新着イラスト＞</p>
+            <% @all_posts.each do |item| %>
+                <div class="post-item">
+                    <p><%= item.title %></p>
+                    <div class="post-image">
+                        <%= link_to image_tag(item.image_1), item %>
+                    </div>
+                    <p><%= link_to "#{item.user.name}", item.user %></p>
+                </div>
+            <% end %>
+            <div class="kaminari">
+                <%= paginate @all_posts, :param_name => 'new_page' %>
+            </div>
+        <% end %>
+    </div>
+   
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-3 secsion">
+            <%= render 'shared/user_field' %>
+            <% if signed_in? %>
+                <div class="btn-follow">
+                    <%= render 'follow' %>
+                </div>
+            <% end %>
+        </div>
+        
+        <div class="col-md-8 col-md-offset-1">
+            <% if @posts.any? %>
+                <%= render @posts %>
+            <% end %>
+        </div>
+        
+    </div>
+</div>
